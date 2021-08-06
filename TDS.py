@@ -222,10 +222,10 @@ class Window(QWidget):
         self.show()
     def fetchData(self,noOfArticles):
         try:
-            consumer_key='q1ISo2WrhUe2FpmAl7JwJLZeh'
-            consumer_secret='CMum2I0SmIs1OJk0darIjT7TKeGc6ZPIrYaKrM2iZswky3Lc4F'
-            access_token='1133384700339347456-vBK8jMkYpnPYzPXpZUTULhIA9MTaPH'
-            access_token_secret='TsisvgkHekLum7xKchEMOJDHJ4S3ZzOBhVEL5voLwHbm9'
+            consumer_key=''
+            consumer_secret=''
+            access_token=''
+            access_token_secret=''
 
             auth=tweepy.OAuthHandler(consumer_key,consumer_secret)
             auth.set_access_token(access_token,access_token_secret)
@@ -248,15 +248,17 @@ class Window(QWidget):
             df.Likes=df.Likes.astype(str)
             df.Date=df.Date.astype(str)
             self.data=df
-        except tweepy.error.TweepError:QMessageBox.warning(QMessageBox(), 'Error', 'Connection Error');sys.exit(app.exec_())
+        except tweepy.error.TweepError:
+            QMessageBox.warning(QMessageBox(), 'Error', 'Connection Error')
+            sys.exit(app.exec_())
 
     def getData(self,noOfArticles):
 
         noOfArticles=int(noOfArticles)
         if len(self.largest_df)<noOfArticles:
 
-            # if noOfArticles>=1000:
-            #     QMessageBox.warning(QMessageBox(), 'Warning', f'Will take {round(noOfArticles*.115/60)} m.\n Press ok to proceed')
+            if noOfArticles>=1000:
+                QMessageBox.warning(QMessageBox(), 'Warning', f'Will take {round(noOfArticles*.115/60)} m.\n Press ok to proceed')
             
             self.fetchData(noOfArticles)
 
@@ -308,21 +310,14 @@ class Window(QWidget):
         self.refresh=QPushButton('Refresh',self)
         self.refresh.setStyleSheet('color:#ff0266;font-size:19px')
         self.about=QPushButton('About',self)
-        self.about.setStyleSheet('color:#ff0266;font-size:19px')
+        self.about.setStyleSheet('color:#0ad800;font-size:19px')
         self.about.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
-
-        self.button_word=QPushButton('Show Word Cloud',self)
-        self.button_word.setToolTip('"Word cloud" of words of all articles ☁ (Temporary suspension)')
-        self.button_word.setStyleSheet("font-size : 19px;color:#6200EE;")
-        # self.button_word.setEnabled(False)
-
-        self.button_word.setFixedWidth(160)
         
         self.about.clicked.connect(self.aboutFunc)
         self.button.clicked.connect(self.show_new_window)
-        # self.button_word.clicked.connect(self.show_new_window_matplotlib)
+     
         self.refresh.clicked.connect(self.refreshFunc)
-        self.button_word.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
+        
         self.refresh.setCursor(QCursor(QtCore.Qt.PointingHandCursor))
         self.refresh.setFixedWidth(160)
         self.about.setFixedWidth(160)
@@ -334,7 +329,7 @@ class Window(QWidget):
         hBoxLayout1.addWidget(self.button)
         hBoxLayout1.addWidget(self.about)
 
-        hBoxLayout2.addWidget(self.button_word)
+        # hBoxLayout2.addWidget(self.button_word)
         hBoxLayout2.addWidget(self.refresh)
         self.vBoxLayout.addWidget(self.textbox)
         self.vBoxLayout.addWidget(self.no)
@@ -387,26 +382,6 @@ class Window(QWidget):
         df=self.data[self.data.Articles.str.contains(self.textbox.text(),case=False)]
         self.w = AnotherWindow(df)
         self.w.show()
-    # def show_new_window_matplotlib(self):
-    #     import matplotlib.pyplot as plt
-    #     from wordcloud import WordCloud, STOPWORDS
-    #     topics_str = " ".join(topics for topics in self.data.Articles)
-    #     stopwords = set(STOPWORDS)
-    #     common_words={'python','Python','data','Data','science','Science','RT','guide','Guide','ML','Model','Learning','model','learning','Machine','machine','Part','part','AI','Using','using'}
-    #     stopwords.update(common_words)
-    #     wine_mask=np.full((512,512), 95, dtype=int)
-    #     transformed_wine_mask = np.ndarray((wine_mask.shape[0],wine_mask.shape[1]), np.int32)
-
-    #     for i in range(len(wine_mask)):
-    #         transformed_wine_mask[i] = list(map(self.transform_format, wine_mask[i]))
-    #     wordcloud = WordCloud(background_color="white", max_words=1000, mask=transformed_wine_mask,stopwords=stopwords, contour_width=3, contour_color='firebrick').generate(topics_str)
-
-    #     plt.figure(figsize=(14,7))
-    #     plt.gcf().canvas.manager.set_window_title('Word Cloud')
-    #     plt.suptitle("Words like 'Python','Data','Guide','ML','Model','Machine','Learning','Part','Using','AI' and 'Science' are omitted because they are more frequent.",fontweight="bold")
-    #     plt.axis("off")
-    #     plt.imshow(wordcloud)
-    #     plt.show()
     
     def transform_format(self,val):
         if val == 0:
