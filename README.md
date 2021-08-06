@@ -5,6 +5,6 @@ First you will need Your twitter developer API tokens to the app.
 
 ## Screenshots
 
-![App Screenshot]('res/python.jpg')
+![App Screenshot]('res/twitter.png')
 
   
