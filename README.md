@@ -11,6 +11,6 @@ First you will need Your twitter developer API tokens to the app.
 ##Result Page
 <img src="res/Screenshot (123).png" align="left" height="250" width="300" > -->
 
-![](https://github.com/AMANPATYAL001/Pyqt5-Desktop-App-TDS/tree/main/res/Screenshot (121).png)
+![](https://github.com/AMANPATYAL001/Pyqt5-Desktop-App-TDS/tree/main/res/ss1.png)
 ![](res/Screenshot (122).png)
 
