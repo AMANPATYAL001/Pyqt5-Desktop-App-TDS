@@ -16,7 +16,7 @@
 ## Deployment : 
 - ### I converted the **.py** to **.exe** file (using **[pyinstaller](https://pyinstaller.readthedocs.io/en/stable/)**) to run on systems which doesn't have **python** or **required libraries**.
 
-- ### Use of NSIS software ([Tech with Tim Video]((https://youtu.be/UZX5kH72Yx4))), for converting **.exe and resource folder** into **one folder** for easy installation  and transfer.
+- ### Use of NSIS software ([Tech with Tim Video](https://youtu.be/UZX5kH72Yx4 )), for converting **.exe and resource folder** into **one folder** for easy installation  and transfer.
 ## Screenshots :
 
 ### Home Page
